@@ -1,0 +1,80 @@
+{
+  "emailPlaceholder": {
+    "EN": "Email",
+    "TR": "E-posta adresi",
+    "FR": "Adresse e-mail",
+    "DE": "Email"
+  },
+  "passwordPlaceholder":{
+    "EN": "Password",
+    "TR": "Şifre",
+    "FR": "Mot de passe",
+    "DE": "Passwort"
+  },
+  "header": {
+    "EN": "Sign in",
+    "TR": "Giriş yap",
+    "FR": "S'identifier",
+    "DE": "Anmelden"
+  },
+  "subheader":{
+    "EN": "Sign in and start managing your account",
+    "TR": "Giriş yap ve hesabını yönetmeye başla",
+    "FR": "Connectez-vous et commencez à gérer votre compte",
+    "DE": "Melden Sie sich an und beginnen Sie mit der Verwaltung Ihres Kontos"
+  },
+  "subheaderWelcome": {
+    "EN": "Welcome back! Please sign in to your account",
+    "TR": "Hoşgeldin! Lütfen hesabınıza giriş yapın",
+    "FR": "Soyez de nouveau le bienvenu! Veuillez vous connecter à votre compte",
+    "DE": "Willkommen zurück! Bitte melden Sie sich in Ihrem Konto ein"
+  },
+  "blankEmailError": {
+    "EN": "Email cannot be blank.",
+    "TR": "E-posta adresinizi girmelisiniz.",
+    "FR": "L'Email ne peut pas être vide.",
+    "DE": "Email kann nicht leer sein."
+  },
+  "invalidEmailError": {
+    "EN": "Please enter a valid email.",
+    "TR": "Geçerli bir e-posta adresi girmelisiniz.",
+    "FR": "Veuillez saisir un email valide",
+    "DE": "Bitte geben Sie eine gültige Email ein."
+  },
+  "blankPasswordError": {
+    "EN": "Password cannot be blank.",
+    "TR": "Şifrenizi girmelisiniz.",
+    "FR": "Le mot de passe ne peut pas être vide.",
+    "DE": "Passwort kann nicht leer sein."
+  },
+  "rememberMe": {
+    "EN": "Remember me",
+    "TR": "Beni hatırla",
+    "FR": "Se souvenir de moi",
+    "DE": "Erinnere dich an mich"
+  },  
+  "forgotPassword": {
+    "EN": "Forgot password",
+    "TR": "Şifremi unuttum",
+    "FR": "Mot de passe oublié",
+    "DE": "Passwort vergessen"
+  },  
+  "haveAccount": {
+    "EN": "Don't have an account?",
+    "TR": "Hesabınız yok mu?",
+    "FR": "N'avez pas de compte?",
+    "DE": "Sie haben kein Konto?"
+  },  
+  "haveAccountButton": {
+    "EN": "Create new one",
+    "TR": "Yeni bir tane oluşturun",
+    "FR": "Créer un nouvel",
+    "DE": "Neues erstellen"
+  },  
+  "errorAfterSubmit": {
+    "EN": "Invalid email or password.",
+    "TR": "Geçersiz e-posta adresi veya şifre.",
+    "FR": "Email ou mot de passe invalide",
+    "DE": "Ungültige Email oder Passwort."
+  } 
+}

@@ -10,9 +10,15 @@ import {
   Button,
   Input,
   Label,
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu,
 } from 'reactstrap';
 import InputWithStatus from './InputWithStatus';
 import './Login.css';
+import languages from './assets/languages.json';
+import FlagItem from './FlagItem';
 
 function isEmail(email) {
   // eslint-disable-next-line
@@ -20,8 +26,11 @@ function isEmail(email) {
 }
 
 function Login() {
+  // eslint-disable-next-line
+  const [language, setLanguage] = useState('EN');
   const [theme, setTheme] = useState('light');
   const [email, setEmail] = useState(localStorage.getItem('email') ?? '');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [password, setPassword] = useState('');
   // eslint-disable-next-line
   const [error, setError] = useState(false);
@@ -36,6 +45,8 @@ function Login() {
   const [passwordError, setPasswordError] = useState('');
   // eslint-disable-next-line
   const [validations, setValidations] = useState([false, false, false, false, false]);
+
+  const [remember, setRemember] = useState(false);
 
   const toggleTheme = () => {
     if (theme === 'light') {
@@ -64,7 +75,9 @@ function Login() {
       if (isEmail(email)) {
         console.log('valid email');
       }
-      localStorage.setItem('email', email);
+      if (remember) {
+        localStorage.setItem('email', email);
+      }
     }
   };
 
@@ -81,25 +94,25 @@ function Login() {
 
     const emailEl = document.getElementById('email');
     const passwordEl = document.getElementById('password');
-    if (isEmailClicked) {
+    if (isEmailClicked || e !== undefined) {
       if (email.trim() === '') {
         setErrorFor(emailEl);
-        setEmailError('Email cannot be blank');
+        setEmailError(languages.blankEmailError[language]);
       } else if (!isEmail(email.trim())) {
         setErrorFor(emailEl);
-        setEmailError('Please enter a valid email');
+        setEmailError(languages.invalidEmailError[language]);
       } else {
         setSuccessFor(emailEl);
         setEmailError('');
       }
     }
 
-    if (isPasswordClicked) {
+    if (isPasswordClicked || e !== undefined) {
       if (password.trim() === '') {
         setErrorFor(passwordEl);
-        setPasswordError('Password cannot be blank');
+        setPasswordError(languages.blankPasswordError[language]);
       } else {
-        setSuccessFor(passwordEl, 'Enter password');
+        setSuccessFor(passwordEl);
         setPasswordError('');
       }
     }
@@ -112,11 +125,72 @@ function Login() {
     checkBeforeSubmit();
   }, [email, password]);
 
+  useEffect(() => {
+    document.title = languages.header[language];
+  }, [language]);
+
   return (
     <div className="login-container mx-0 px-4">
-      <div className="w-100 pt-3">
-        {/* eslint-disable-next-line */}
-        <label className="switch d-flex ml-auto">
+      <div className="w-100 pt-3 d-flex">
+        <div className="d-flex ml-auto align-items-center">
+          <Dropdown
+            color="danger"
+            isOpen={isDropdownOpen}
+            toggle={() => { setIsDropdownOpen(!isDropdownOpen); }}
+          >
+            <DropdownToggle
+              caret
+              className="pl-3 d-flex align-items-center dropdown-toggle"
+            >
+              <FlagItem language={language} />
+              &nbsp;&nbsp;
+              <span className="language-text">
+                {language}
+              </span>
+            </DropdownToggle>
+            <DropdownMenu
+              className="dropdown-menu"
+            >
+              <DropdownItem
+                className="dropdown-item"
+                onClick={() => {
+                  setLanguage('EN');
+                }}
+              >
+                <FlagItem language="EN" />
+                <span className="language-text">&nbsp;&nbsp;English</span>
+              </DropdownItem>
+              <DropdownItem
+                className="dropdown-item"
+                onClick={() => {
+                  setLanguage('DE');
+                }}
+              >
+                <FlagItem language="DE" />
+                <span className="language-text">&nbsp;&nbsp;Deutsch</span>
+              </DropdownItem>
+              <DropdownItem
+                className="dropdown-item"
+                onClick={() => {
+                  setLanguage('FR');
+                }}
+              >
+                <FlagItem language="FR" />
+                <span className="language-text">&nbsp;&nbsp;Français</span>
+              </DropdownItem>
+              <DropdownItem
+                className="dropdown-item"
+                onClick={() => {
+                  setLanguage('TR');
+                }}
+              >
+                <FlagItem language="TR" />
+                <span className="language-text">&nbsp;&nbsp;Türkçe</span>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          {/* eslint-disable-next-line */}
+        <label className="switch ml-4 mb-0">
           <input
             type="checkbox"
             className="toggle"
@@ -133,6 +207,8 @@ function Login() {
           })}
           />
         </label>
+
+        </div>
       </div>
       <Row className="justify-content-center">
         <Col
@@ -154,15 +230,23 @@ function Login() {
               >
                 <Col xs="12">
                   <div
-                    className="p-4 d-flex justify-content-start"
+                    className="px-4 py-2 login-card-header"
                     style={{
                       fontSize: '16px',
                       fontWeight: 500,
                       color: '#495057',
                     }}
                   >
-                    <p className="ml-1">
-                      Sign in to continue to ABC Company
+                    <h1>{languages.header[language]}</h1>
+                    <p
+                      style={{
+                        whiteSpace: 'pre-line',
+                      }}
+                    >
+                      {localStorage.getItem('email')
+                        ? languages.subheaderWelcome[language]
+                        : languages.subheader[language]}
+
                     </p>
                   </div>
                 </Col>
@@ -175,23 +259,25 @@ function Login() {
                 borderRadius: '4px',
               }}
             >
-              <div className="p-2 pt-4">
+              <div className={classnames({
+                'p-2': true,
+                'pt-4': ['TR', 'EN'].includes(language),
+                'pt-5': ['DE', 'FR'].includes(language),
+              })}
+              >
                 <Form id="login-form" className="form-horizontal" onSubmit={checkBeforeSubmit}>
-                  {error && (
-                  <Alert color="danger">Invalid email or password.</Alert>
-                  )}
+                  <Alert className="mt-5 mb-0" color="danger" isOpen={error} toggle={() => setError(false)}>{languages.errorAfterSubmit[language]}</Alert>
                   <div className="form-group">
-
                     <InputWithStatus
                       id="email"
                       name="email"
                       type="email"
                       val={email}
+                      placeholder={languages.emailPlaceholder[language]}
                       onChange={(e) => {
                         setIsEmailClicked(true);
                         setEmail(e.target.value);
                       }}
-                      placeholder="Email"
                     />
                     <p className="error-text">{emailError}</p>
 
@@ -206,11 +292,11 @@ function Login() {
                       name="password"
                       type="password"
                       val={password}
+                      placeholder={languages.passwordPlaceholder[language]}
                       onChange={(e) => {
                         setIsPasswordClicked(true);
                         setPassword(e.target.value);
                       }}
-                      placeholder="Password"
                     />
                     <p className="error-text">{passwordError}</p>
 
@@ -221,12 +307,17 @@ function Login() {
                         id="remember-me-checkbox"
                         name="remember-me"
                         type="checkbox"
+                        onChange={(e) => {
+                          setRemember(e.target.checked);
+                        }}
                       />
-                      <Label for="remember-me-checkbox" className="btn-forgot text-muted">Remember me</Label>
+                      <Label for="remember-me-checkbox" className="btn-forgot text-muted">
+                        { languages.rememberMe[language] }
+                      </Label>
                     </Col>
                     <Col className="btn-forgot">
-                      <Button color="link" className="btn-link text-muted">
-                        Forgot password?
+                      <Button type="button" color="link" className="btn-link text-muted">
+                        { languages.forgotPassword[language] }
                       </Button>
                     </Col>
                   </Row>
@@ -238,9 +329,31 @@ function Login() {
                       type="submit"
                       disabled={loading}
                     >
-                      Sign In
+                      { languages.header[language] }
                     </Button>
                   </div>
+                  <Row className="mt-4">
+                    <Col
+                      className="text-muted"
+                      style={{
+                        fontWeight: 600,
+                      }}
+                    >
+                      <span>
+                        {languages.haveAccount[language]}
+                      &nbsp;
+                      </span>
+
+                      <Button
+                        type="button"
+                        color="link"
+                        className="btn-link"
+                      >
+
+                        {languages.haveAccountButton[language]}
+                      </Button>
+                    </Col>
+                  </Row>
                 </Form>
               </div>
             </CardBody>
