@@ -53,10 +53,12 @@ function Login() {
       setTheme('dark');
       document.body.classList.remove('light-theme');
       document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
     } else {
       setTheme('light');
       document.body.classList.remove('dark-theme');
       document.body.classList.add('light-theme');
+      localStorage.setItem('theme', 'light');
     }
   };
   const setSuccessFor = (input) => {
@@ -128,6 +130,16 @@ function Login() {
   useEffect(() => {
     document.title = languages.header[language];
   }, [language]);
+
+  useEffect(() => {
+    const localTheme = localStorage.getItem('theme');
+    if (localTheme) {
+      const oppositeTheme = localTheme === 'dark' ? 'light' : 'dark';
+      setTheme(localTheme);
+      document.body.classList.remove(`${oppositeTheme}-theme`);
+      document.body.classList.add(`${localTheme}-theme`);
+    }
+  }, []);
 
   return (
     <div className="login-container mx-0 px-4">
