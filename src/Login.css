@@ -327,6 +327,7 @@ body.dark-theme .theme-icon{
 .dropdown-toggle{
   background-color: var(--bg-third-color); 
   border-radius: 15px;
+  border: 0;
 }
 .dropdown-toggle[aria-expanded=true]{
   background-color: var(--bg-third-color) !important; 
