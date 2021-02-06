@@ -1,47 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
+import {
+  Spinner,
+} from 'reactstrap';
 import EN from './assets/flags/en.svg';
 import DE from './assets/flags/de.svg';
 import FR from './assets/flags/fr.svg';
 import TR from './assets/flags/tr.svg';
-// import EN from './assets/flags/english.svg';
-// import DE from './assets/flags/german.svg';
-// import FR from './assets/flags/french.svg';
-// import TR from './assets/flags/turkish.svg';
+
+const getFlagUrl = (lang) => {
+  let flag = EN;
+  switch (lang) {
+    case 'EN':
+      flag = EN;
+      break;
+    case 'DE':
+      flag = DE;
+      break;
+    case 'FR':
+      flag = FR;
+      break;
+    case 'TR':
+      flag = TR;
+      break;
+    default:
+      flag = EN;
+      break;
+  }
+  return flag;
+};
 
 function FlagItem({ language }) {
-  const [currentFlag, setCurrentFlag] = useState(EN);
-  useEffect(() => {
-    let flag = EN;
-    switch (language) {
-      case 'EN':
-        flag = EN;
-        break;
-      case 'DE':
-        flag = DE;
-        break;
-      case 'FR':
-        flag = FR;
-        break;
-      case 'TR':
-        flag = TR;
-        break;
-      default:
-        flag = EN;
-        break;
-    }
-    setCurrentFlag(flag);
-  }, [language]);
   return (
-    <img
-      src={currentFlag}
-      width="28"
-      height="18"
-      alt="language flag"
-      style={{
-        borderRadius: '3px',
-      }}
-    />
+    <Suspense fallback={<Spinner className="mr-2" color="secondary" />}>
+      <img
+        src={getFlagUrl(language)}
+        className="language-flag"
+        alt="language flag"
+        style={{
+          borderRadius: '3px',
+        }}
+      />
+    </Suspense>
   );
 }
 FlagItem.propTypes = {
