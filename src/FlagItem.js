@@ -35,7 +35,7 @@ function FlagItem({ language }) {
   return (
     <img
       src={currentFlag}
-      width="30"
+      width="28"
       alt="language flag"
       style={{
         borderRadius: '3px',

@@ -150,13 +150,14 @@ function Login() {
       <div className="w-100 pt-3 d-flex">
         <div className="d-flex ml-auto align-items-center">
           <Dropdown
+            className="dropdown"
             color="danger"
             isOpen={isDropdownOpen}
             toggle={() => { setIsDropdownOpen(!isDropdownOpen); }}
           >
             <DropdownToggle
               caret
-              className="pl-3 d-flex align-items-center dropdown-toggle"
+              className="d-flex align-items-center dropdown-toggle"
             >
               <FlagItem language={language} />
               &nbsp;&nbsp;
