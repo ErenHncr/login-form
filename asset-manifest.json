@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/login-form/static/css/main.faa56910.chunk.css",
-    "main.js": "/login-form/static/js/main.c4e4fe1d.chunk.js",
-    "main.js.map": "/login-form/static/js/main.c4e4fe1d.chunk.js.map",
+    "main.css": "/login-form/static/css/main.ffc419ce.chunk.css",
+    "main.js": "/login-form/static/js/main.091c0037.chunk.js",
+    "main.js.map": "/login-form/static/js/main.091c0037.chunk.js.map",
     "runtime-main.js": "/login-form/static/js/runtime-main.ccaccc85.js",
     "runtime-main.js.map": "/login-form/static/js/runtime-main.ccaccc85.js.map",
     "static/css/2.658248ec.chunk.css": "/login-form/static/css/2.658248ec.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.19d23ad0.chunk.js.map": "/login-form/static/js/2.19d23ad0.chunk.js.map",
     "index.html": "/login-form/index.html",
     "static/css/2.658248ec.chunk.css.map": "/login-form/static/css/2.658248ec.chunk.css.map",
-    "static/css/main.faa56910.chunk.css.map": "/login-form/static/css/main.faa56910.chunk.css.map",
+    "static/css/main.ffc419ce.chunk.css.map": "/login-form/static/css/main.ffc419ce.chunk.css.map",
     "static/js/2.19d23ad0.chunk.js.LICENSE.txt": "/login-form/static/js/2.19d23ad0.chunk.js.LICENSE.txt",
     "static/media/de.0a61e80b.svg": "/login-form/static/media/de.0a61e80b.svg",
     "static/media/en.a2a4a738.svg": "/login-form/static/media/en.a2a4a738.svg",
@@ -21,7 +21,7 @@
     "static/js/runtime-main.ccaccc85.js",
     "static/css/2.658248ec.chunk.css",
     "static/js/2.19d23ad0.chunk.js",
-    "static/css/main.faa56910.chunk.css",
-    "static/js/main.c4e4fe1d.chunk.js"
+    "static/css/main.ffc419ce.chunk.css",
+    "static/js/main.091c0037.chunk.js"
   ]
 }
