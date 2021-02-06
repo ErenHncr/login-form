@@ -207,7 +207,7 @@ function Login() {
             </DropdownMenu>
           </Dropdown>
           {/* eslint-disable-next-line */}
-        <label className="switch ml-4 mb-0">
+        <label className="switch ml-3 mb-0">
           <input
             type="checkbox"
             className="toggle"
