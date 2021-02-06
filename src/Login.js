@@ -61,6 +61,23 @@ function Login() {
       localStorage.setItem('theme', 'light');
     }
   };
+
+  const getDropdownItem = (langShort, langLong = null) => (
+    <DropdownItem
+      className="dropdown-item"
+      onClick={() => {
+        setLanguage(langShort);
+      }}
+    >
+      <FlagItem language={langShort} />
+      <span className="language-text">
+        &nbsp;
+        &nbsp;
+        {langLong}
+      </span>
+    </DropdownItem>
+  );
+
   const setSuccessFor = (input) => {
     const inputWithStatus = input.parentElement;
     inputWithStatus.className = 'input-with-status';
@@ -168,42 +185,10 @@ function Login() {
             <DropdownMenu
               className="dropdown-menu"
             >
-              <DropdownItem
-                className="dropdown-item"
-                onClick={() => {
-                  setLanguage('EN');
-                }}
-              >
-                <FlagItem language="EN" />
-                <span className="language-text">&nbsp;&nbsp;English</span>
-              </DropdownItem>
-              <DropdownItem
-                className="dropdown-item"
-                onClick={() => {
-                  setLanguage('DE');
-                }}
-              >
-                <FlagItem language="DE" />
-                <span className="language-text">&nbsp;&nbsp;Deutsch</span>
-              </DropdownItem>
-              <DropdownItem
-                className="dropdown-item"
-                onClick={() => {
-                  setLanguage('FR');
-                }}
-              >
-                <FlagItem language="FR" />
-                <span className="language-text">&nbsp;&nbsp;Français</span>
-              </DropdownItem>
-              <DropdownItem
-                className="dropdown-item"
-                onClick={() => {
-                  setLanguage('TR');
-                }}
-              >
-                <FlagItem language="TR" />
-                <span className="language-text">&nbsp;&nbsp;Türkçe</span>
-              </DropdownItem>
+              {getDropdownItem('EN', 'English')}
+              {getDropdownItem('DE', 'Deutsch')}
+              {getDropdownItem('FR', 'Français')}
+              {getDropdownItem('TR', 'Türkçe')}
             </DropdownMenu>
           </Dropdown>
           {/* eslint-disable-next-line */}
@@ -366,7 +351,6 @@ function Login() {
                         color="link"
                         className="btn-link"
                       >
-
                         {languages.haveAccountButton[language]}
                       </Button>
                     </Col>

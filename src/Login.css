@@ -356,10 +356,19 @@ body.dark-theme .theme-icon{
   background-color: var(--bg-fourth-color) !important; 
 }
 .dropdown-menu{
+  padding-top: 0;
+  padding-bottom: 0;
   margin-left: -48px;
   background-color: var(--bg-color);
   border: 1.2px solid var(--bg-third-color);
 }
+.dropdown-item{
+  padding-top: 6px;
+  padding-bottom: 7px;
+  display: flex;
+  align-items: center;
+}
+
 body.dark-theme .dropdown-item:hover{
   background-color: var(--bg-secondary-color);
 }
