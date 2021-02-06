@@ -84,7 +84,7 @@ function Login() {
   };
 
   const checkBeforeSubmit = (e = undefined) => {
-    if (e !== undefined) {
+    if (e !== undefined && e !== null) {
       e.preventDefault();
     }
     const valids = [
@@ -109,7 +109,7 @@ function Login() {
       }
     }
 
-    if (isPasswordClicked || e !== undefined) {
+    if (isPasswordClicked || e !== undefined || e === null) {
       if (password.trim() === '') {
         setErrorFor(passwordEl);
         setPasswordError(languages.blankPasswordError[language]);
@@ -126,6 +126,10 @@ function Login() {
   useEffect(() => {
     checkBeforeSubmit();
   }, [email, password]);
+
+  useEffect(() => {
+    checkBeforeSubmit(null);
+  }, [language]);
 
   useEffect(() => {
     document.title = languages.header[language];
