@@ -326,12 +326,14 @@ body.dark-theme .theme-icon{
 
 .dropdown{
   height: 30px;
+  width: 90px;
 }
 .dropdown-toggle{
   background-color: var(--bg-third-color); 
   border-radius: 15px;
   border: 0;
   height: 2.143rem !important;
+  width: 90px;
   padding: 5.8px 10.5px 4.2px 14px !important;
 }
 .dropdown-toggle[aria-expanded=true]{
