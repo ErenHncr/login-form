@@ -33,8 +33,9 @@ function Login() {
   const [email, setEmail] = useState(localStorage.getItem('email') ?? '');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [password, setPassword] = useState('');
-  // eslint-disable-next-line
+
   const [error, setError] = useState(false);
+  const [status, setStatus] = useState(false);
   // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
 
@@ -109,11 +110,27 @@ function Login() {
   };
 
   const handleSubmit = (e) => {
-    if (e !== undefined) {
+    if (e !== undefined && e !== null) {
+      setError(false);
       if (email !== 'a@a.com') {
-        setError(true);
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+          setStatus('error');
+          setError(true);
+        }, 1500);
+        setTimeout(() => {
+          setStatus(null);
+        }, 2500);
       } else {
-        console.log(email);
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+          setStatus('ok');
+        }, 1500);
+        setTimeout(() => {
+          setStatus(null);
+        }, 2500);
       }
       if (remember) {
         localStorage.setItem('email', email);
@@ -134,7 +151,7 @@ function Login() {
 
     const emailEl = document.getElementById('email');
     const passwordEl = document.getElementById('password');
-    console.log(e);
+
     if (e !== undefined || e === null) {
       if (isEmailClicked || e !== null) {
         if (email.trim() === '') {
@@ -354,13 +371,27 @@ function Login() {
                   </Row>
                   <div className="mt-4">
                     <Button
+                      disabled={loading || status === 'ok'}
                       id="signin-btn"
-                      color="primary"
-                      className="btn btn-primary btn-block waves-effect waves-light"
+                      color={status === 'ok' ? 'success' : 'primary'}
+                      className="btn btn-block waves-effect waves-light"
                       type="submit"
-                      disabled={loading}
                     >
-                      { languages.header[language] }
+                      {/* { languages.header[language] } */}
+
+                      {status === 'ok' && (
+                      <>
+                        <i className="bx bx-loader bx-spin mr-2" />
+                        {languages.redirecting[language]}
+                      </>
+                      )}
+                      {loading === true && (
+                      <>
+                        <i className="bx bx-loader bx-spin mr-2" />
+                        {languages.signingIn[language]}
+                      </>
+                      )}
+                      {(loading !== true) && status !== 'ok' && languages.header[language] }
                     </Button>
                   </div>
                   <Row className="mt-4">

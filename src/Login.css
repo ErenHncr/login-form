@@ -83,6 +83,14 @@ body.dark-theme .alert-danger span{
   background-color: var(--primary-color);  
 }
 
+.btn-success {
+  background-color: var(--success-color) !important;  
+}
+
+.bx-loader{
+  color: #fff;
+}
+
 .form-group input{
   color: var(--text-color);
   background-color: var(--bg-secondary-color);
@@ -258,6 +266,9 @@ body.dark-theme .alert-danger span{
 #signin-btn{
   height: 3.2rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-white{

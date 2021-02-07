@@ -82,5 +82,17 @@
     "TR": "placeholder ile giriş yap",
     "FR": "Connectez-vous avec placeholder",
     "DE": "Mit placeholder nmelden"
+  },
+  "redirecting": {
+    "EN": "Redirecting",
+    "TR": "Yönlendiriliyor",
+    "FR": "Redirection",
+    "DE": "Umleiten"
+  },
+  "signingIn": {
+    "EN": "Signing in",
+    "TR": "Giriş yapılıyor",
+    "FR": "Connectez-vous",
+    "DE": "Einloggen"
   } 
 }
