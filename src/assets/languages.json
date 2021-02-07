@@ -76,5 +76,11 @@
     "TR": "Geçersiz e-posta adresi veya şifre.",
     "FR": "Email ou mot de passe invalide",
     "DE": "Ungültige Email oder Passwort."
+  },
+  "signInWith": {
+    "EN": "Sign in with placeholder",
+    "TR": "placeholder ile giriş yap",
+    "FR": "Connectez-vous avec placeholder",
+    "DE": "Mit placeholder nmelden"
   } 
 }
