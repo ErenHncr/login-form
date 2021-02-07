@@ -1,27 +1,31 @@
 {
   "files": {
-    "main.css": "/login-form/static/css/main.ffc419ce.chunk.css",
-    "main.js": "/login-form/static/js/main.091c0037.chunk.js",
-    "main.js.map": "/login-form/static/js/main.091c0037.chunk.js.map",
+    "main.css": "/login-form/static/css/main.058435aa.chunk.css",
+    "main.js": "/login-form/static/js/main.281de915.chunk.js",
+    "main.js.map": "/login-form/static/js/main.281de915.chunk.js.map",
     "runtime-main.js": "/login-form/static/js/runtime-main.ccaccc85.js",
     "runtime-main.js.map": "/login-form/static/js/runtime-main.ccaccc85.js.map",
     "static/css/2.658248ec.chunk.css": "/login-form/static/css/2.658248ec.chunk.css",
-    "static/js/2.19d23ad0.chunk.js": "/login-form/static/js/2.19d23ad0.chunk.js",
-    "static/js/2.19d23ad0.chunk.js.map": "/login-form/static/js/2.19d23ad0.chunk.js.map",
+    "static/js/2.ee87aad1.chunk.js": "/login-form/static/js/2.ee87aad1.chunk.js",
+    "static/js/2.ee87aad1.chunk.js.map": "/login-form/static/js/2.ee87aad1.chunk.js.map",
     "index.html": "/login-form/index.html",
     "static/css/2.658248ec.chunk.css.map": "/login-form/static/css/2.658248ec.chunk.css.map",
-    "static/css/main.ffc419ce.chunk.css.map": "/login-form/static/css/main.ffc419ce.chunk.css.map",
-    "static/js/2.19d23ad0.chunk.js.LICENSE.txt": "/login-form/static/js/2.19d23ad0.chunk.js.LICENSE.txt",
-    "static/media/de.0a61e80b.svg": "/login-form/static/media/de.0a61e80b.svg",
-    "static/media/en.a2a4a738.svg": "/login-form/static/media/en.a2a4a738.svg",
-    "static/media/fr.457edd56.svg": "/login-form/static/media/fr.457edd56.svg",
-    "static/media/tr.896aae45.svg": "/login-form/static/media/tr.896aae45.svg"
+    "static/css/main.058435aa.chunk.css.map": "/login-form/static/css/main.058435aa.chunk.css.map",
+    "static/js/2.ee87aad1.chunk.js.LICENSE.txt": "/login-form/static/js/2.ee87aad1.chunk.js.LICENSE.txt",
+    "static/media/de.svg": "/login-form/static/media/de.0a61e80b.svg",
+    "static/media/en.svg": "/login-form/static/media/en.a2a4a738.svg",
+    "static/media/facebook.svg": "/login-form/static/media/facebook.2e9c6b5f.svg",
+    "static/media/fr.svg": "/login-form/static/media/fr.457edd56.svg",
+    "static/media/google.svg": "/login-form/static/media/google.1b08e565.svg",
+    "static/media/microsoft.svg": "/login-form/static/media/microsoft.aedc8b1c.svg",
+    "static/media/tr.svg": "/login-form/static/media/tr.896aae45.svg",
+    "static/media/twitter.svg": "/login-form/static/media/twitter.e8deb775.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ccaccc85.js",
     "static/css/2.658248ec.chunk.css",
-    "static/js/2.19d23ad0.chunk.js",
-    "static/css/main.ffc419ce.chunk.css",
-    "static/js/main.091c0037.chunk.js"
+    "static/js/2.ee87aad1.chunk.js",
+    "static/css/main.058435aa.chunk.css",
+    "static/js/main.281de915.chunk.js"
   ]
 }
