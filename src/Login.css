@@ -126,7 +126,7 @@ body.dark-theme .alert-danger span{
   align-items: flex-start;
   height: 100vh;
   margin: auto;
-  padding-right: 0px;
+  padding: 0px 15px;
 }
 .login-card{
   align-self: baseline;
@@ -473,8 +473,3 @@ body.dark-theme .dropdown-item:hover{
 .capitalize{
   text-transform: capitalize !important;
 }
-
-/* .social-icon.twitter, .social-icon.google{
-  height: 18px !important;
-  max-height: 18px;
-} */

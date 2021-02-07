@@ -11,7 +11,7 @@ function InputWithStatus({
       return 'text';
     }
     return 'password';
-  }, [showPass, setShowPass]);
+  }, [showPass]);
 
   return (
     <div className="input-with-status">

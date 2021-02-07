@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classnames from 'classnames';
 import {
   Row,
@@ -84,22 +84,6 @@ function Login() {
     );
   };
 
-  const getDropdownItem = (langShort, langLong = null) => (
-    <DropdownItem
-      className="dropdown-item"
-      onClick={() => {
-        setLanguage(langShort);
-      }}
-    >
-      <FlagIcon language={langShort} />
-      <span className="language-text">
-        &nbsp;
-        &nbsp;
-        {langLong}
-      </span>
-    </DropdownItem>
-  );
-
   const setSuccessFor = (input) => {
     const inputWithStatus = input.parentElement;
     inputWithStatus.className = 'input-with-status';
@@ -109,51 +93,54 @@ function Login() {
     inputWithStatus.className = 'input-with-status error';
   };
 
-  const handleSubmit = (e) => {
-    if (e !== undefined && e !== null) {
-      setError(false);
-      if (email !== 'a@a.com') {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setStatus('error');
-          setError(true);
-        }, 1500);
-        setTimeout(() => {
-          setStatus(null);
-        }, 2500);
-      } else {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setStatus('ok');
-        }, 1500);
-        setTimeout(() => {
-          setStatus(null);
-        }, 2500);
+  const handleSubmit = useCallback(
+    (e = undefined) => {
+      if (e !== undefined && e !== null) {
+        setError(false);
+        if (email !== 'a@a.com') {
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+            setStatus('error');
+            setError(true);
+          }, 1500);
+          setTimeout(() => {
+            setStatus(null);
+          }, 2500);
+        } else {
+          setLoading(true);
+          setTimeout(() => {
+            setLoading(false);
+            setStatus('ok');
+          }, 1500);
+          setTimeout(() => {
+            setStatus(null);
+          }, 2500);
+        }
+        if (remember) {
+          localStorage.setItem('email', email);
+        }
       }
-      if (remember) {
-        localStorage.setItem('email', email);
+    },
+    [email, remember],
+  );
+
+  const checkBeforeSubmit = useCallback(
+    (e = undefined) => {
+      if (e !== undefined && typeof e !== 'string') {
+        e.preventDefault();
       }
-    }
-  };
+      const valids = [
+        (isEmail(email.trim())),
+        password.trim() !== '',
+      ];
+      setValidations(valids);
+      const filledAreas = valids.reduce((acc, cur) => acc + cur);
 
-  const checkBeforeSubmit = (e = undefined) => {
-    if (e !== undefined && e !== null) {
-      e.preventDefault();
-    }
-    const valids = [
-      (isEmail(email.trim())),
-      password.trim() !== '',
-    ];
-    setValidations(valids);
-    const filledAreas = valids.reduce((acc, cur) => acc + cur);
+      const emailEl = document.getElementById('email');
+      const passwordEl = document.getElementById('password');
 
-    const emailEl = document.getElementById('email');
-    const passwordEl = document.getElementById('password');
-
-    if (e !== undefined || e === null) {
-      if (isEmailClicked || e !== null) {
+      if (isEmailClicked || e !== undefined || typeof e === 'string') {
         if (email.trim() === '') {
           setErrorFor(emailEl);
           setEmailError(languages.blankEmailError[language]);
@@ -166,7 +153,7 @@ function Login() {
         }
       }
 
-      if (isPasswordClicked || e !== null) {
+      if (isPasswordClicked || e !== undefined || typeof e === 'string') {
         if (password.trim() === '') {
           setErrorFor(passwordEl);
           setPasswordError(languages.blankPasswordError[language]);
@@ -175,25 +162,51 @@ function Login() {
           setPasswordError('');
         }
       }
-    }
-    if (filledAreas === 2) {
-      handleSubmit(e);
-    }
-  };
+      if (filledAreas === 2) {
+        handleSubmit(e);
+      }
+    },
+    [email,
+      password,
+      language,
+      handleSubmit,
+      isEmailClicked,
+      isPasswordClicked],
+  );
+
+  const getDropdownItem = (langShort, langLong = null) => (
+    <DropdownItem
+      className="dropdown-item"
+      onClick={() => {
+        setLanguage(langShort);
+        localStorage.setItem('lang', langShort);
+      }}
+    >
+      <FlagIcon language={langShort} />
+      <span className="language-text">
+        &nbsp;
+        &nbsp;
+        {langLong}
+      </span>
+    </DropdownItem>
+  );
 
   useEffect(() => {
-    checkBeforeSubmit(null);
-  }, [email, password]);
-
-  useEffect(() => {
-    checkBeforeSubmit(null);
-  }, [language]);
+    checkBeforeSubmit();
+  }, [email, password, checkBeforeSubmit]);
 
   useEffect(() => {
     document.title = languages.header[language];
-  }, [language]);
+    if (isEmailClicked || isPasswordClicked) checkBeforeSubmit();
+  }, [language, isEmailClicked, isPasswordClicked, checkBeforeSubmit]);
 
   useEffect(() => {
+    if (localStorage.getItem('lang') === null) {
+      localStorage.setItem('lang', 'EN');
+    } else {
+      const lang = localStorage.getItem('lang').toUpperCase();
+      setLanguage(lang);
+    }
     const localTheme = localStorage.getItem('theme');
     if (localTheme) {
       const oppositeTheme = localTheme === 'dark' ? 'light' : 'dark';
@@ -204,7 +217,7 @@ function Login() {
   }, []);
 
   return (
-    <div className="login-container mx-0 px-4">
+    <div className="login-container mx-0">
       <div className="w-100 pt-3 d-flex">
         <div className="d-flex ml-auto align-items-center">
           <Dropdown
@@ -232,24 +245,24 @@ function Login() {
               {getDropdownItem('TR', 'Türkçe')}
             </DropdownMenu>
           </Dropdown>
-          {/* eslint-disable-next-line */}
-        <label className="switch ml-3 mb-0">
-          <input
-            type="checkbox"
-            className="toggle"
-            onChange={() => {
-              toggleTheme();
-            }}
-          />
-          <span className="slider round" />
-          <i className={classnames({
-            bx: true,
-            'bxs-moon': theme === 'dark',
-            'bxs-sun': theme === 'light',
-            'theme-icon': true,
-          })}
-          />
-        </label>
+          <label htmlFor="theme-toggle" className="switch ml-3 mb-0">
+            <input
+              id="theme-toggle"
+              type="checkbox"
+              className="toggle"
+              onChange={() => {
+                toggleTheme();
+              }}
+            />
+            <span className="slider round" />
+            <i className={classnames({
+              bx: true,
+              'bxs-moon': theme === 'dark',
+              'bxs-sun': theme === 'light',
+              'theme-icon': true,
+            })}
+            />
+          </label>
 
         </div>
       </div>
@@ -376,6 +389,10 @@ function Login() {
                       color={status === 'ok' ? 'success' : 'primary'}
                       className="btn btn-block waves-effect waves-light"
                       type="submit"
+                      onClick={() => {
+                        setIsEmailClicked(true);
+                        setIsPasswordClicked(true);
+                      }}
                     >
                       {/* { languages.header[language] } */}
 
@@ -409,7 +426,7 @@ function Login() {
                       <Button
                         type="button"
                         color="link"
-                        className="btn-link"
+                        className="btn-link createnewone"
                       >
                         {languages.haveAccountButton[language]}
                       </Button>
