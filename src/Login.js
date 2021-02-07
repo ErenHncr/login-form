@@ -18,7 +18,8 @@ import {
 import InputWithStatus from './InputWithStatus';
 import './Login.css';
 import languages from './assets/languages.json';
-import FlagItem from './FlagItem';
+import FlagIcon from './FlagIcon';
+import SocialIcon from './SocialIcon';
 
 function isEmail(email) {
   // eslint-disable-next-line
@@ -62,6 +63,26 @@ function Login() {
     }
   };
 
+  const getSocialItem = (social) => {
+    const socialCapitalized = social.charAt(0).toUpperCase() + social.slice(1);
+    return (
+      <Row className="mt-3">
+        <Col>
+          <Button
+            type="button"
+            color="secondary"
+            className={`btn-white w-100 social-btn ${language.toLowerCase()}`}
+          >
+            <SocialIcon brand={social} />
+            <span>
+              {languages.signInWith[language].replace('placeholder', socialCapitalized)}
+            </span>
+          </Button>
+        </Col>
+      </Row>
+    );
+  };
+
   const getDropdownItem = (langShort, langLong = null) => (
     <DropdownItem
       className="dropdown-item"
@@ -69,7 +90,7 @@ function Login() {
         setLanguage(langShort);
       }}
     >
-      <FlagItem language={langShort} />
+      <FlagIcon language={langShort} />
       <span className="language-text">
         &nbsp;
         &nbsp;
@@ -89,10 +110,10 @@ function Login() {
 
   const handleSubmit = (e) => {
     if (e !== undefined) {
-      console.log(email);
-      console.log(password);
-      if (isEmail(email)) {
-        console.log('valid email');
+      if (email !== 'a@a.com') {
+        setError(true);
+      } else {
+        console.log(email);
       }
       if (remember) {
         localStorage.setItem('email', email);
@@ -113,26 +134,29 @@ function Login() {
 
     const emailEl = document.getElementById('email');
     const passwordEl = document.getElementById('password');
-    if (isEmailClicked || e !== undefined) {
-      if (email.trim() === '') {
-        setErrorFor(emailEl);
-        setEmailError(languages.blankEmailError[language]);
-      } else if (!isEmail(email.trim())) {
-        setErrorFor(emailEl);
-        setEmailError(languages.invalidEmailError[language]);
-      } else {
-        setSuccessFor(emailEl);
-        setEmailError('');
+    console.log(e);
+    if (e !== undefined || e === null) {
+      if (isEmailClicked || e !== null) {
+        if (email.trim() === '') {
+          setErrorFor(emailEl);
+          setEmailError(languages.blankEmailError[language]);
+        } else if (!isEmail(email.trim())) {
+          setErrorFor(emailEl);
+          setEmailError(languages.invalidEmailError[language]);
+        } else {
+          setSuccessFor(emailEl);
+          setEmailError('');
+        }
       }
-    }
 
-    if (isPasswordClicked || e !== undefined || e === null) {
-      if (password.trim() === '') {
-        setErrorFor(passwordEl);
-        setPasswordError(languages.blankPasswordError[language]);
-      } else {
-        setSuccessFor(passwordEl);
-        setPasswordError('');
+      if (isPasswordClicked || e !== null) {
+        if (password.trim() === '') {
+          setErrorFor(passwordEl);
+          setPasswordError(languages.blankPasswordError[language]);
+        } else {
+          setSuccessFor(passwordEl);
+          setPasswordError('');
+        }
       }
     }
     if (filledAreas === 2) {
@@ -141,7 +165,7 @@ function Login() {
   };
 
   useEffect(() => {
-    checkBeforeSubmit();
+    checkBeforeSubmit(null);
   }, [email, password]);
 
   useEffect(() => {
@@ -176,7 +200,7 @@ function Login() {
               caret
               className="d-flex align-items-center dropdown-toggle"
             >
-              <FlagItem language={language} />
+              <FlagIcon language={language} />
               &nbsp;&nbsp;
               <span className="language-text">
                 {language}
@@ -269,7 +293,12 @@ function Login() {
               >
                 <Form id="login-form" className="form-horizontal" onSubmit={checkBeforeSubmit}>
                   <Alert className="mt-5 mb-0" color="danger" isOpen={error} toggle={() => setError(false)}>{languages.errorAfterSubmit[language]}</Alert>
-                  <div className="form-group">
+                  <div
+                    className="form-group"
+                    style={{
+                      marginTop: '-5px',
+                    }}
+                  >
                     <InputWithStatus
                       id="email"
                       name="email"
@@ -355,7 +384,26 @@ function Login() {
                       </Button>
                     </Col>
                   </Row>
+
                 </Form>
+                <Row className="divider">
+                  <Col md="5">
+                    <hr className="line" />
+                  </Col>
+                  <Col className="line-text">
+                    or
+                  </Col>
+                  <Col md="5">
+                    <hr className="line" />
+                  </Col>
+                </Row>
+                <div className="social-buttons">
+                  {getSocialItem('google')}
+                  {getSocialItem('facebook')}
+                  {getSocialItem('twitter')}
+                  {getSocialItem('microsoft')}
+                </div>
+
               </div>
             </CardBody>
           </Card>
