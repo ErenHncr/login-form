@@ -332,7 +332,7 @@ function Login() {
                     <InputWithStatus
                       id="email"
                       name="email"
-                      type="email"
+                      type="text"
                       val={email}
                       placeholder={languages.emailPlaceholder[language]}
                       onChange={(e) => {
