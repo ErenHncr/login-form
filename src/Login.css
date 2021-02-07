@@ -11,11 +11,15 @@
   font-family: Inter, sans-serif !important;
   --text-color: #222;
   --text-secondary-color: rgba(36, 36, 36, 0.856);
+  --text-third-color: rgba(150,150, 150);
   --bg-color: #fff;
   --bg-secondary-color: rgba(255, 255, 255, 0.8);
   --bg-third-color: rgb(201, 201, 201);
   --anchor-color: #0033cc;
   --icon-color: #ff3300;
+  --social-bg-color: rgb(205, 205, 205);
+  --social-bg-hover-color: rgb(190, 190, 190);
+  --social-bg-active-color: rgb(180, 180, 180);
 }
 * {
   text-align: start;
@@ -26,12 +30,16 @@ body.light-theme {
   font-family: Inter, sans-serif !important;
   --text-color: #222;
   --text-secondary-color: rgba(36, 36, 36, 0.856);
+  --text-third-color: rgba(150,150, 150);
   --bg-color: #fff;
   --bg-secondary-color: rgba(255, 255, 255, 0.8);
   --bg-third-color: rgb(201, 201, 201);
   --bg-fourth-color: rgb(147, 147, 147);
   --anchor-color: #0033cc;
   --primary-color: #007bff;
+  --social-bg-color: rgb(205, 205, 205);
+  --social-bg-hover-color: rgb(190, 190, 190);
+  --social-bg-active-color: rgb(180, 180, 180);
 }
 
 body.dark-theme {  
@@ -39,6 +47,7 @@ body.dark-theme {
   font-family: Inter, sans-serif !important;
   --text-color: rgba(230, 230, 230);
   --text-secondary-color:  rgb(160, 160, 160);
+  --text-third-color: rgba(120, 120, 120);
   --bg-color: #212225;
   /* --bg-color: #121212; */
   --bg-secondary-color: #121212d8;
@@ -47,7 +56,9 @@ body.dark-theme {
   --anchor-color: #809fff;
   --gray-200: #eee;
   --primary-color: #007bff;
- 
+  --social-bg-color: rgb(60, 60, 60);
+  --social-bg-hover-color: rgb(75, 75, 75);
+  --social-bg-active-color: rgb(85, 85, 85);
 }
 
 body.dark-theme .alert-danger{
@@ -81,10 +92,28 @@ body.dark-theme .alert-danger span{
   width: 100%;
 }
 
+.divider{
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  margin-bottom: 18px;
+}
+.divider .col{
+  text-align: center;
+  color: var(--text-third-color);
+}
+
+.line {
+  background-color: var(--bg-third-color);
+}
+.line-text{
+  margin-bottom: 3px;
+}
+
 .login-container{
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 150px 1fr;
+  grid-template-rows: 80px 1fr;
   justify-items: center; 
   align-items: flex-start;
   height: 100vh;
@@ -230,6 +259,24 @@ body.dark-theme .alert-danger span{
   height: 3.2rem;
   font-weight: 500;
 }
+
+.btn-white{
+  border: 0;
+  border-radius: 3.2rem;
+  background-color: var(--social-bg-color) !important;
+  color: var(--text-color) !important;
+  height: 3.2rem;
+  box-shadow: 4px 4px 28px 0px rgba(36, 16, 0, 0.199);
+}
+.btn-white:hover{
+  background-color: var(--social-bg-hover-color) !important;
+  color: var(--text-color) !important;
+}
+
+.btn-white:active{
+  background-color: var(--social-bg-active-color) !important;
+  color: var(--text-color) !important;
+} 
 
 .remember-me{
   margin-left: 18px;
@@ -384,3 +431,39 @@ body.dark-theme .dropdown-item:hover{
   height: 18px !important;
   max-height: 18px;
 }
+
+.social-btn{
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  justify-items: center !important; 
+  align-items: center;
+}
+
+.social-btn.fr{
+  grid-template-columns: 80px 1fr !important;
+}
+
+.social-btn span, .social-btn2 span {
+  justify-self: self-start;
+  font-weight: 600;
+}
+.social-icon{
+  justify-self: self-start;
+  padding-left: 10px;
+  height: 18px !important;
+  max-height: 18px;
+}
+ .social-icon.facebook{
+  height: 21px !important;
+  max-height: 21px;
+  padding-left: 9px;
+}
+
+.capitalize{
+  text-transform: capitalize !important;
+}
+
+/* .social-icon.twitter, .social-icon.google{
+  height: 18px !important;
+  max-height: 18px;
+} */
