@@ -373,12 +373,12 @@ function Login() {
                         }}
                       />
                       <Label for="remember-me-checkbox" className="btn-forgot text-muted">
-                        { languages.rememberMe[language] }
+                        {languages.rememberMe[language]}
                       </Label>
                     </Col>
                     <Col className="btn-forgot">
                       <Button type="button" color="link" className="btn-link text-muted">
-                        { languages.forgotPassword[language] }
+                        {languages.forgotPassword[language]}
                       </Button>
                     </Col>
                   </Row>
@@ -397,18 +397,18 @@ function Login() {
                       {/* { languages.header[language] } */}
 
                       {status === 'ok' && (
-                      <>
-                        <i className="bx bx-loader bx-spin mr-2" />
-                        {languages.redirecting[language]}
-                      </>
+                        <>
+                          <i className="bx bx-loader bx-spin mr-2" />
+                          {languages.redirecting[language]}
+                        </>
                       )}
                       {loading === true && (
-                      <>
-                        <i className="bx bx-loader bx-spin mr-2" />
-                        {languages.signingIn[language]}
-                      </>
+                        <>
+                          <i className="bx bx-loader bx-spin mr-2" />
+                          {languages.signingIn[language]}
+                        </>
                       )}
-                      {(loading !== true) && status !== 'ok' && languages.header[language] }
+                      {(loading !== true) && status !== 'ok' && languages.header[language]}
                     </Button>
                   </div>
                   <Row className="mt-4">
